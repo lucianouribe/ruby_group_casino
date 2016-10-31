@@ -1,12 +1,16 @@
 class Highlow
-  # @temp_array = []
+
   attr_accessor :player
 
   def initialize(player)
-    puts "Welcome to High Low: #{player.name}"
-    puts "You have #{player.bank_roll} dollars to play with!"
+    puts "--- High & Low ---\n".colorize(:blue)
+    puts "Welcome to High Low: #{player.name.capitalize}"
+    puts "You have $#{player.bank_roll} dollars to play with!"
     @player = player
-    place_the_bet
+    puts "[1] Play"
+    puts "[2] Main Menu"
+    choice = gets.strip
+    place_the_bet if choice == '1'
   end
 
   def place_the_bet
@@ -22,7 +26,7 @@ class Highlow
   end
 
   def roll_number_01
-    puts "Lets roll"; sleep 0
+    puts "Lets roll...".colorize(:purple); sleep 2
     @roll_1 = rand(1..100)
     puts @roll_1
     high_or_low
@@ -46,12 +50,12 @@ class Highlow
       if @roll_1 < @roll_2
         puts "You won!!!".colorize(:green)
         @player.bank_roll = @player.bank_roll + @bet
-        puts "Now you have #{@player.bank_roll}"
+        puts "Now you have $#{@player.bank_roll}"
         players_choice
       else
-        puts "You loose".colorize(:red)
+        puts "You loose!!!".colorize(:red)
         @player.bank_roll = @player.bank_roll - @bet
-        puts "Now you have #{@player.bank_roll}"
+        puts "Now you have $#{@player.bank_roll}"
         players_choice
       end
     else
@@ -60,12 +64,12 @@ class Highlow
         puts "You won!!!".colorize(:green)
         # puts player.bank_roll + @temp_array
         @player.bank_roll = @player.bank_roll + @bet
-        puts "Now you have #{@player.bank_roll}"
+        puts "Now you have $#{@player.bank_roll}"
         players_choice
       else
         puts "You loose".colorize(:red)
         @player.bank_roll = @player.bank_roll - @bet
-        puts "Now you have #{@player.bank_roll}"
+        puts "Now you have $#{@player.bank_roll}"
         players_choice
       end
     end

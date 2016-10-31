@@ -3,8 +3,9 @@ class Slots
   attr_accessor :player
 
   def initialize(player)
-    puts "Welcome to Slots: #{player.name.capitalize}"
-    puts "You have #{player.bank_roll} dollars to play with!\a"
+    puts "--- Slots ---\n".colorize(:blue)
+    puts "Welcome #{player.name.capitalize}"
+    puts "You have $#{player.bank_roll} dollars to play with!\a"
     @player = player
     place_the_bet
   end
@@ -22,27 +23,24 @@ class Slots
   end
 
   def rolling_slots
-    slot_01 = ['A', 'B', 'C']
-    slot_02 = ['A', 'B', 'C']
-    slot_03 = ['A', 'B', 'C']
+    slot_01 = ['A', 'K', 'Q', 'J', '10', '9']
+    slot_02 = ['A', 'K', 'Q', 'J', '10', '9']
+    slot_03 = ['A', 'K', 'Q', 'J', '10', '9']
     temp = []
 
-    puts "Slot machine working"
-    # option_01 = slot_01[rand(0..2)].colorize(:blue); sleep 0
-    option_01 = slot_01[rand(0..2)]
+    puts "Slot machine working"; sleep 1
+    option_01 = slot_01[rand(0..5)]
     temp << option_01
     print " " + option_01.colorize(:yellow)
-    option_02 = slot_02[rand(0..2)]
+    option_02 = slot_02[rand(0..5)]
     temp << option_02
     print " " + option_02.colorize(:blue); sleep 1
-    option_03 = slot_03[rand(0..2)]
+    option_03 = slot_03[rand(0..5)]
     temp << option_03
     puts " " + option_03.colorize(:red); sleep 1
     temp = temp.uniq
-    temp = temp.flatten
-    # binding.pry
     temp = temp.count
-    # puts temp
+
 
     if temp == 1
       puts "Jackpot!!!!".colorize(:green)
@@ -50,7 +48,7 @@ class Slots
       print "You now have $"
       puts "#{@player.bank_roll}".colorize(:light_blue)
     elsif temp == 2
-      puts "You break even".colorize(:yellow)
+      puts "You break even!".colorize(:yellow)
       print "You now have $"
       puts "#{@player.bank_roll}".colorize(:light_blue)
     else
