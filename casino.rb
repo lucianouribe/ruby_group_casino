@@ -9,7 +9,10 @@ class Casino
   end
 
   def menu
-    #  Figure out how the menu should look
+    puts "Choose the game you want to play"
+    puts "[1] Highs and Lows"
+    puts "[2] blabla"
+    puts "[3] Exit"
   end
 end
 
