@@ -13,9 +13,12 @@ class Highlow
     puts "Place your bet"
     # choice
     @bet = gets.strip.to_i
-    # @bank_roll = @bank_roll - bet
-    # puts "Remaining bank #{@bank_roll - @temp_array}"
-    roll_number_01
+    if @bet > @player.bank_roll
+      puts 'Not enough money!'
+      place_the_bet
+    else
+      roll_number_01
+    end
   end
 
   def roll_number_01

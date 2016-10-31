@@ -1,9 +1,10 @@
+require 'pry'
 class Slots
   attr_accessor :player
 
   def initialize(player)
-    puts "Welcome to Slots: #{player.name}"
-    puts "You have #{player.bank_roll} dollars to play with!"
+    puts "Welcome to Slots: #{player.name.capitalize}"
+    puts "You have #{player.bank_roll} dollars to play with!\a"
     @player = player
     place_the_bet
   end
@@ -12,40 +13,59 @@ class Slots
     puts "Place your bet"
     # choice
     @bet = gets.strip.to_i
-    # @bank_roll = @bank_roll - bet
-    # puts "Remaining bank #{@bank_roll - @temp_array}"
-    rolling_slots
+    if @bet > @player.bank_roll
+      puts "Not enough money!\a".colorize(:color => :red, :background => :yellow)
+      place_the_bet
+    else
+      rolling_slots
+    end
   end
 
   def rolling_slots
     slot_01 = ['A', 'B', 'C']
     slot_02 = ['A', 'B', 'C']
     slot_03 = ['A', 'B', 'C']
-
+    temp = []
 
     puts "Slot machine working"
-    option_01 = slot_01[rand(0..2)]; sleep 0
-    print option_01
-    option_02 = slot_02[rand(0..2)]; sleep 0
-    print option_02
-    option_03 = slot_03[rand(0..2)]; sleep 0
-    print option_03
+    # option_01 = slot_01[rand(0..2)].colorize(:blue); sleep 0
+    option_01 = slot_01[rand(0..2)]
+    temp << option_01
+    print " " + option_01.colorize(:yellow)
+    option_02 = slot_02[rand(0..2)]
+    temp << option_02
+    print " " + option_02.colorize(:blue); sleep 1
+    option_03 = slot_03[rand(0..2)]
+    temp << option_03
+    puts " " + option_03.colorize(:red); sleep 1
+    temp = temp.uniq
+    temp = temp.flatten
+    # binding.pry
+    temp = temp.count
+    # puts temp
 
-    if option_01 == option_02 == option_03
-      puts "Jackpot!!!!"
-    elsif option_01 == option_02 != option_03
-      puts "You get what you bet"
-    elsif option_01 == option_03 != option_02
-      puts "You get what you bet"
-    elsif option_02 == option_03 != option_01
-      puts "You get what you bet"
+    if temp == 1
+      puts "Jackpot!!!!".colorize(:green)
+      @player.bank_roll = @player.bank_roll + (@bet * 2)
+      print "You now have $"
+      puts "#{@player.bank_roll}".colorize(:light_blue)
+    elsif temp == 2
+      puts "You break even".colorize(:yellow)
+      print "You now have $"
+      puts "#{@player.bank_roll}".colorize(:light_blue)
     else
-      puts "Your money is mine!!!"
+      puts "Your money is mine!!!".colorize(:red)
+      @player.bank_roll = @player.bank_roll - @bet
+      print "You now have $"
+      puts "#{@player.bank_roll}".colorize(:light_blue)
     end
-    # win_or_loose_situation
+    players_choice
   end
 
-  # def win_or_loose_situation
-  #
-  # end
+  def players_choice
+    puts "Do you want to continue playing this game?"
+    answer = gets.strip.downcase
+    place_the_bet if answer.include?('y')
+      # call roll_1 again instead of initialize
+  end
 end
