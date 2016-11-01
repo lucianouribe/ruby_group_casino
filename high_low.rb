@@ -3,7 +3,7 @@ class Highlow
   attr_accessor :player
 
   def initialize(player)
-    puts "--- High & Low ---\n".colorize(:blue)
+    puts "--- High & Low ---\n".colorize(:blue); sleep 1
     puts "Welcome to High Low: #{player.name.capitalize}"
     puts "You have $#{player.bank_roll} dollars to play with!"
     @player = player
@@ -19,7 +19,7 @@ class Highlow
     @bet = gets.strip.to_i
     if @bet > @player.bank_roll
       puts 'Not enough money!'
-      place_the_bet
+      TooHatedWellsFargo.new(player)
     else
       roll_number_01
     end

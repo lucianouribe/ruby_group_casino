@@ -5,6 +5,7 @@ require_relative 'high_low'
 require_relative 'slots'
 require_relative 'wellsfargobank'
 require_relative 'roulette'
+require_relative 'dice'
 require_relative 'punctuation_roulette'
 # require_relative 'punctuation_roulette'
 
@@ -26,16 +27,19 @@ class Casino
       if @players.count <= 4
         @player = Player.new
         @players << @player
-      else
+      elsif @players.count > 4
         puts "This is not a stadium, it's a gambling game"; sleep 1
         puts "Just enough room for four!"; sleep 1
         puts "Too late! Go away!".colorize(:red)
       end
     else
+      puts "0 Main Menu"
       @players.each_with_index { |x, i| puts "#{i + 1} #{x.name.capitalize} \t$#{x.bank_roll}" }
       puts "Choose player"
       pick_existing_player = gets.strip
       case pick_existing_player
+        when '0'
+          puts "Back to Main Menu"
         when '1'
           @player = @players[0]
         when '2'
@@ -56,7 +60,7 @@ class Casino
     puts "[1] Highs and Lows"
     puts "[2] Slots"
     puts "[3] Roulette"
-    puts "[4] Black Jack"
+    puts "[4] Dice"
     puts "[5] Players"
     puts "[6] Bank"
     puts "[7] Exit"
@@ -69,7 +73,7 @@ class Casino
       when '3'
         Roulette.new(player)
       when '4'
-        # BlackJack.new(player)
+        Dice.new(player)
       when '5'
         users
       when '6'

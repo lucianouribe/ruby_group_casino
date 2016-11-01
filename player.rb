@@ -35,10 +35,6 @@ class Player
       LuckyRoulette.new(self)
     end
   end
-  # def win_lucky_roulette
-  #   self.punctuation = 0
-  #   @player.bank_roll = @player.bank_roll + @loose_win
-  #   puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
-  # end
+
 
 end

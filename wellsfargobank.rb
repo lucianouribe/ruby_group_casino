@@ -12,7 +12,7 @@ class TooHatedWellsFargo
     puts "You have $#{@player.bank_roll} in your wallet"
     puts "[1] Get more money"
     puts "[2] Cash out"
-    puts "[3] Casino menu"
+    puts "[3] Main Menu"
     choice = gets.strip
     case choice
       when '1'

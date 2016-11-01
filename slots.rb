@@ -3,11 +3,31 @@ class Slots
   attr_accessor :player
 
   def initialize(player)
-    puts "--- Slots ---\n".colorize(:blue)
+    puts """
+          .-------.
+       oO{-JACKPOT-}Oo
+       .=============. __
+       | [a] [X] [o] |(  )
+       | [$] [$] [$] | ||
+       | [X] [o] [$] | ||
+       |             |_||
+       | xxx ::::::: |--'
+       | ooo ::::::: |
+       | $$$ ::::::: |
+       |             |
+       |      __ === |
+       |_____/ \\_____|
+      /###############\\
+
+    """
+    puts "--- Slots ---\n".colorize(:blue); sleep 1
     puts "Welcome #{player.name.capitalize}"
     puts "You have $#{player.bank_roll} dollars to play with!\a"
     @player = player
-    place_the_bet
+    puts "[1] Play"
+    puts "[2] Main Menu"
+    choice = gets.strip
+    place_the_bet if choice == '1'
   end
 
   def place_the_bet
@@ -15,7 +35,7 @@ class Slots
     @bet = gets.strip.to_i
     if @bet > @player.bank_roll
       puts "Not enough money!\a".colorize(:color => :red, :background => :yellow)
-      place_the_bet
+      TooHatedWellsFargo.new(player)
     else
       rolling_slots
     end
