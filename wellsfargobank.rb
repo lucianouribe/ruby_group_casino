@@ -19,7 +19,7 @@ class TooHatedWellsFargo
         puts "How much do you want?"
         add_money = gets.strip.to_i
         @player.bank_roll = @player.bank_roll + add_money
-        puts "Now your account has $#{@player.bank_roll}"
+        puts "Now your account has $#{@player.bank_roll} and #{@player.punctuation} points"
       when'2'
         puts "Cashing out..."; sleep 0
         puts "Take your $#{@player.bank_roll} and go away!"
