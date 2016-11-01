@@ -12,7 +12,6 @@ class Slots
 
   def place_the_bet
     puts "Place your bet"
-    # choice
     @bet = gets.strip.to_i
     if @bet > @player.bank_roll
       puts "Not enough money!\a".colorize(:color => :red, :background => :yellow)
@@ -45,17 +44,16 @@ class Slots
     if temp == 1
       puts "Jackpot!!!!".colorize(:green)
       @player.bank_roll = @player.bank_roll + (@bet * 2)
-      print "You now have $"
-      puts "#{@player.bank_roll}".colorize(:light_blue)
+      @player.punctuation = @player.punctuation + 1
+      puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
     elsif temp == 2
       puts "You break even!".colorize(:yellow)
-      print "You now have $"
-      puts "#{@player.bank_roll}".colorize(:light_blue)
+      puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
     else
       puts "Your money is mine!!!".colorize(:red)
       @player.bank_roll = @player.bank_roll - @bet
-      print "You now have $"
-      puts "#{@player.bank_roll}".colorize(:light_blue)
+      @player.punctuation = @player.punctuation - 1
+      puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
     end
     players_choice
   end

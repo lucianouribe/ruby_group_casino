@@ -4,6 +4,7 @@ require_relative 'player'
 require_relative 'high_low'
 require_relative 'slots'
 require_relative 'wellsfargobank'
+# require_relative 'punctuation_roulette'
 
 class Casino
   attr_accessor :player
@@ -50,8 +51,6 @@ class Casino
   def menu
     puts "--- Main Menu ---\n".colorize(:blue)
     puts "Choose the game you want to play"
-    # Pass player instance into each game / class that needed access to the player
-
     puts "[1] Highs and Lows"
     puts "[2] Slots"
     puts "[3] Players"
@@ -74,6 +73,7 @@ class Casino
     end
     menu
   end
+
 end
 
 Casino.new #Calls casino class

@@ -27,7 +27,7 @@ class Highlow
 
   def roll_number_01
     puts "Lets roll...".colorize(:purple); sleep 2
-    @roll_1 = rand(1..100)
+    @roll_1 = rand(1..10)
     puts @roll_1
     high_or_low
   end
@@ -39,7 +39,7 @@ class Highlow
   end
 
   def roll_number_02
-    @roll_2 = rand(1..100)
+    @roll_2 = rand(1..10)
     puts @roll_2
     outcome
   end
@@ -50,26 +50,29 @@ class Highlow
       if @roll_1 < @roll_2
         puts "You won!!!".colorize(:green)
         @player.bank_roll = @player.bank_roll + @bet
-        puts "Now you have $#{@player.bank_roll}"
+        @player.punctuation = @player.punctuation + 1
+        puts "Now you have $#{@player.bank_roll} and #{@player.punctuation} points"
         players_choice
       else
         puts "You loose!!!".colorize(:red)
         @player.bank_roll = @player.bank_roll - @bet
-        puts "Now you have $#{@player.bank_roll}"
+        @player.punctuation = @player.punctuation - 1
+        puts "Now you have $#{@player.bank_roll} and #{@player.punctuation} points"
         players_choice
       end
     else
       command = 'low'
       if @roll_1 > @roll_2
         puts "You won!!!".colorize(:green)
-        # puts player.bank_roll + @temp_array
         @player.bank_roll = @player.bank_roll + @bet
-        puts "Now you have $#{@player.bank_roll}"
+        @player.punctuation = @player.punctuation + 1
+        puts "Now you have $#{@player.bank_roll} and #{@player.punctuation} points"
         players_choice
       else
         puts "You loose".colorize(:red)
         @player.bank_roll = @player.bank_roll - @bet
-        puts "Now you have $#{@player.bank_roll}"
+        @player.punctuation = @player.punctuation - 1
+        puts "Now you have $#{@player.bank_roll} and #{@player.punctuation} points"
         players_choice
       end
     end
@@ -79,6 +82,6 @@ class Highlow
     puts "Do you want to continue playing this game?"
     answer = gets.strip.downcase
     place_the_bet if answer.include?('y')
-      # call roll_1 again instead of initialize
   end
+
 end

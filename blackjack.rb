@@ -1,0 +1,5 @@
+
+
+banca = []
+
+player = []

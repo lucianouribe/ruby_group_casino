@@ -1,3 +1,7 @@
-@bank_roll = 100
-@temp_array = gets.strip.to_i
-puts @bank_roll - @temp_array
+temp = 3
+bla = temp % 2
+if bla == 0
+  puts "odd"
+else
+  puts "even"
+end
