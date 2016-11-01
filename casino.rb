@@ -5,6 +5,7 @@ require_relative 'high_low'
 require_relative 'slots'
 require_relative 'wellsfargobank'
 require_relative 'roulette'
+require_relative 'punctuation_roulette'
 # require_relative 'punctuation_roulette'
 
 class Casino

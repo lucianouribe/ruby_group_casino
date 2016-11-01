@@ -50,13 +50,13 @@ class Highlow
       if @roll_1 < @roll_2
         puts "You won!!!".colorize(:green)
         @player.bank_roll = @player.bank_roll + @bet
-        @player.punctuation = @player.punctuation + 1
+        @player.increment_punctuation
         puts "Now you have $#{@player.bank_roll} and #{@player.punctuation} points"
         players_choice
       else
         puts "You loose!!!".colorize(:red)
         @player.bank_roll = @player.bank_roll - @bet
-        @player.punctuation = @player.punctuation - 1
+        @player.unincrement_punctuation
         puts "Now you have $#{@player.bank_roll} and #{@player.punctuation} points"
         players_choice
       end
@@ -65,13 +65,13 @@ class Highlow
       if @roll_1 > @roll_2
         puts "You won!!!".colorize(:green)
         @player.bank_roll = @player.bank_roll + @bet
-        @player.punctuation = @player.punctuation + 1
+        @player.increment_punctuation
         puts "Now you have $#{@player.bank_roll} and #{@player.punctuation} points"
         players_choice
       else
         puts "You loose".colorize(:red)
         @player.bank_roll = @player.bank_roll - @bet
-        @player.punctuation = @player.punctuation - 1
+        @player.unincrement_punctuation
         puts "Now you have $#{@player.bank_roll} and #{@player.punctuation} points"
         players_choice
       end

@@ -44,7 +44,7 @@ class Slots
     if temp == 1
       puts "Jackpot!!!!".colorize(:green)
       @player.bank_roll = @player.bank_roll + (@bet * 2)
-      @player.punctuation = @player.punctuation + 1
+      @player.increment_punctuation
       puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
     elsif temp == 2
       puts "You break even!".colorize(:yellow)
@@ -52,7 +52,7 @@ class Slots
     else
       puts "Your money is mine!!!".colorize(:red)
       @player.bank_roll = @player.bank_roll - @bet
-      @player.punctuation = @player.punctuation - 1
+      @player.unincrement_punctuation
       puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
     end
     players_choice

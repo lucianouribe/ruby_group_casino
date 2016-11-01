@@ -62,27 +62,27 @@ class Roulette
     if @loose_win == @num_bet
       puts "You win!!!!".colorize(:green)
       @player.bank_roll = @player.bank_roll + (@bet * 36)
-      @player.punctuation = @player.punctuation + 5
+      @player.increment_punctuation
       puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
     elsif @color == @color_bet
       puts "You win!!!!".colorize(:green)
       @player.bank_roll = @player.bank_roll + @bet
-      @player.punctuation = @player.punctuation + 1
+      @player.increment_punctuation
       puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
     elsif @loose_win != @num_bet
       puts "You loose!!!!".colorize(:red)
       @player.bank_roll = @player.bank_roll - @bet
-      @player.punctuation = @player.punctuation - 1
+      @player.unincrement_punctuation
       puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
     elsif @color != @color_bet
       puts "You loose!!!!".colorize(:red)
       @player.bank_roll = @player.bank_roll - @bet
-      @player.punctuation = @player.punctuation - 1
+      @player.unincrement_punctuation
       puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
     end
     players_choice
   end
-  
+
   def players_choice
     puts "Do you want to continue playing this game?"
     answer = gets.strip.downcase

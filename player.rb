@@ -1,3 +1,5 @@
+require './punctuation_roulette'
+
 class Player
   attr_accessor :name, :bank_roll, :punctuation
 
@@ -21,34 +23,22 @@ class Player
     end
   end
 
-
-
-end
-
-
-class Puntos
-attr_accessor :player
-
-  def initialize(player)
-    @punctuation = 0
-  end
-
-  def puntuacion
-    if @player.punctuation == 10
-      @player.punctuation = 0
-      lucky_roulette
-    elsif @player.punctuation == -10
-      @player.punctuation = 0
-      unlucky_roulette
+  def increment_punctuation
+    self.punctuation += 1
+    if self.punctuation == 2
+      LuckyRoulette.new(self)
     end
-
   end
-  def lucky_roulette
-    puts "Here is the lucky roulette"
+  def unincrement_punctuation
+    self.punctuation -= 1
+    if self.punctuation == -2
+      LuckyRoulette.new(self)
+    end
   end
-
-  def unlucky_roulette
-    puts "Here is the unlucky roulette"
-  end
+  # def win_lucky_roulette
+  #   self.punctuation = 0
+  #   @player.bank_roll = @player.bank_roll + @loose_win
+  #   puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+  # end
 
 end
