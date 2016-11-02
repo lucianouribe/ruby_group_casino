@@ -3,6 +3,9 @@ class Highlow
   attr_accessor :player
 
   def initialize(player)
+    puts """
+      
+    """
     puts "--- High & Low ---\n".colorize(:blue); sleep 1
     puts "Welcome to High Low: #{player.name.capitalize}"
     puts "You have $#{player.bank_roll} dollars to play with!"

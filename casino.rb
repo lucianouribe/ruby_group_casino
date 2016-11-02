@@ -7,6 +7,8 @@ require_relative 'wellsfargobank'
 require_relative 'roulette'
 require_relative 'dice'
 require_relative 'punctuation_roulette'
+require_relative 'deck'
+require_relative 'card'
 # require_relative 'punctuation_roulette'
 
 class Casino
@@ -61,9 +63,10 @@ class Casino
     puts "[2] Slots"
     puts "[3] Roulette"
     puts "[4] Dice"
-    puts "[5] Players"
-    puts "[6] Bank"
-    puts "[7] Exit"
+    puts "[5] Black Jack"
+    puts "[6] Players"
+    puts "[7] Bank"
+    puts "[8] Exit"
     choice = gets.strip
     case choice
       when '1'
@@ -75,10 +78,12 @@ class Casino
       when '4'
         Dice.new(player)
       when '5'
-        users
+        Deck.new(player)
       when '6'
-        TooHatedWellsFargo.new(player)
+        users
       when '7'
+        TooHatedWellsFargo.new(player)
+      when '8'
         exit
       else
         puts "Learn how to write"
