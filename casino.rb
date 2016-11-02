@@ -8,7 +8,7 @@ require_relative 'roulette'
 require_relative 'dice'
 require_relative 'punctuation_roulette'
 require_relative 'deck'
-require_relative 'card'
+# require_relative 'card'
 # require_relative 'punctuation_roulette'
 
 class Casino

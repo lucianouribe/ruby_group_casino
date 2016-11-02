@@ -1,5 +1,5 @@
 require 'pry'
-
+require_relative 'card'
 class Deck
 
   attr_accessor :player, :cards, :rank, :suit, :value
@@ -79,6 +79,7 @@ class Deck
       puts "#{@gamer[0].rank} #{@gamer[0].suit}"
       puts "#{@gamer[1].rank} #{@gamer[1].suit}"
       puts "#{@gamer[2].rank} #{@gamer[2].suit}"
+      #TODO:Make this to work with more than one hit (this goes for the player and the dealer)
       puts "Value: #{@gamer_value}"; sleep 0
       player_issue
     elsif choice == 2
@@ -98,6 +99,7 @@ class Deck
       puts "Value: #{@dealer_value}"
       dealer_issue
     elsif @dealer_value > 21
+      #TODO: Check issue with blackjack for dealer and player
       puts "You win!!!!".colorize(:green)
       @player.bank_roll = @player.bank_roll + @bet
       @player.increment_punctuation
