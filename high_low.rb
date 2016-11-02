@@ -4,8 +4,16 @@ class Highlow
 
   def initialize(player)
     puts """
-      
-    """
+       ,-------.
+       |,-----.|
+      /,'-----'.\\   
+     {_/(') (')\\_}
+      `.   _   .'
+       /'-___-'\\
+      /         \\
+     (_)_______(_)
+       \\_______/
+    """.colorize(:blue)
     puts "--- High & Low ---\n".colorize(:blue); sleep 1
     puts "Welcome to High Low: #{player.name.capitalize}"
     puts "You have $#{player.bank_roll} dollars to play with!"

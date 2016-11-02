@@ -5,19 +5,29 @@ class Deck
   attr_accessor :player, :cards, :rank, :suit, :value
 
   def initialize(player)
-   puts "--- Black Jack ---\n".colorize(:blue); sleep 1
-   puts "Welcome #{player.name.capitalize}"
-   puts "You have $#{player.bank_roll} dollars to play with!\a"
-   @player = player
-   @ranks = %w(A 2 3 4 5 6 7 8 9 10 J Q K)
-   @value = [11,2,3,4,5,6,7,8,9,10, 10, 10, 10]
-   @suits = %w(Spades Diamonds Clubs Hearts)
-   @color = %w(Red Black)
-   @cards = []
-   puts "[1] Play"
-   puts "[2] Main Menu"
-   choice = gets.strip
-   place_the_bet if choice == '1'
+    puts """
+    .------.
+    |A_  _ |
+    |( \\/ ).-----.
+    | \\  /|K /\\  |
+    |  \\/ | /  \\ |
+    `-----| \\  / |
+          |  \\/ K|
+          `------'
+    """.colorize(:blue)
+    puts "--- Black Jack ---\n".colorize(:blue); sleep 1
+    puts "Welcome #{player.name.capitalize}"
+    puts "You have $#{player.bank_roll} dollars to play with!\a"
+    @player = player
+    @ranks = %w(A 2 3 4 5 6 7 8 9 10 J Q K)
+    @value = [11,2,3,4,5,6,7,8,9,10, 10, 10, 10]
+    @suits = %w(Spades Diamonds Clubs Hearts)
+    @color = %w(Red Black)
+    @cards = []
+    puts "[1] Play"
+    puts "[2] Main Menu"
+    choice = gets.strip
+    place_the_bet if choice == '1'
   end
 
   def place_the_bet
@@ -50,12 +60,14 @@ class Deck
     @gamer << @cards.sample
     @dealer << @cards.sample
     @dealer << @cards.sample
-
+    # carro = @dealer[0..a].value.each { |a| sum+=a }
+    # puts carro
+    # @dealer_value = @dealer.inject(0){|sum,x| @dealer[sum].value + x }
     @dealer_value = @dealer[0].value + @dealer[1].value
     @gamer_value = @gamer[0].value + @gamer[1].value
     puts "Dealer Cards".colorize(:yellow)
     puts "#{@dealer[0].rank} #{@dealer[0].suit}"
-    puts "#{@dealer[1].rank} #{@dealer[1].suit}"
+    puts "Dealer Card"
     # puts "Value: #{@dealer_value}"
     puts ""
     puts "Your cards!".colorize(:cyan)
@@ -104,6 +116,7 @@ class Deck
       @player.bank_roll = @player.bank_roll + @bet
       @player.increment_punctuation
       puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+      players_choice
     else
       if @dealer_value > @gamer_value
         puts "Your value...."; sleep 1
@@ -115,6 +128,7 @@ class Deck
         @player.bank_roll = @player.bank_roll - @bet
         @player.unincrement_punctuation
         puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+        players_choice
       else
         puts "Your value...."; sleep 1
         puts "#{@gamer_value}"; sleep 1
@@ -125,6 +139,7 @@ class Deck
         @player.bank_roll = @player.bank_roll + @bet
         @player.increment_punctuation
         puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+        players_choice
       end
     end
   players_choice
@@ -136,11 +151,13 @@ class Deck
       @player.bank_roll = @player.bank_roll - @bet
       @player.unincrement_punctuation
       puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+      players_choice
     elsif @gamer_value == 21
       puts "Black Jack!!!".colorize(:gree)
       @player.bank_roll = @player.bank_roll + (@bet * 3)
       @player.increment_punctuation
       puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+      players_choice
     end
   end
 

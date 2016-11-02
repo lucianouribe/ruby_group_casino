@@ -1,143 +1,154 @@
+require 'pry'
+require_relative 'card'
+class Deck
 
+  attr_accessor :player, :cards, :rank, :suit, :value
 
-# @ranks = %w(A 2 3 4 5 6 7 8 9 10 J Q K)
-@ranks = [1,2,3,4,5,6,7,8,9,10, 11, 12, 13]
-@suits = %w(Spades Diamonds Clubs Hearts)
-@dealer = []
-@gamer = []
-  def start
-    puts "--- Black Jack ---\n"
-    # puts "Welcome to Black Jack: #{player.name.capitalize}"
-    # puts "You have $#{player.bank_roll} dollars to play with!"
-    # @player = player
-    puts "[1] Play"
-    puts "[2] Main Menu"
-    choice = gets.strip
-    place_the_bet if choice == '1'
+  def initialize(player)
+   puts "--- Black Jack ---\n".colorize(:blue); sleep 1
+   puts "Welcome #{player.name.capitalize}"
+   puts "You have $#{player.bank_roll} dollars to play with!\a"
+   @player = player
+   @ranks = %w(A 2 3 4 5 6 7 8 9 10 J Q K)
+   @value = [11,2,3,4,5,6,7,8,9,10, 10, 10, 10]
+   @suits = %w(Spades Diamonds Clubs Hearts)
+   @color = %w(Red Black)
+   @cards = []
+   puts "[1] Play"
+   puts "[2] Main Menu"
+   choice = gets.strip
+   place_the_bet if choice == '1'
   end
 
   def place_the_bet
-    puts "Place your bet"
-    # choice
-    # @bet = gets.strip.to_i
-    # if @bet > @player.bank_roll
-    #   puts 'Not enough money!'
-    #   place_the_bet
-    # else
-      dealing_process
-    # end
+   puts "Place your bet"
+   @bet = gets.strip.to_i
+   if @bet > @player.bank_roll
+     puts "Not enough money!\a".colorize(:color => :red, :background => :yellow)
+     TooHatedWellsFargo.new(player)
+   else
+     generate_deck
+   end
   end
 
-def dealing_process
-  puts "The dealer deals the cards..."; sleep 0
-  deal
-  deal_01 = @card
-  @dealer << deal_01
-  deal
-  deal_02 = @card
-  @dealer << deal_02
-  deal
-  deal_03 = @card
-  @gamer << deal_03
-  deal
-  deal_04 = @card
-  @gamer << deal_04
-  # puts @card
-  puts "#{@dealer[0]} #{@dealer[1]}"
-  @dealer_sum = @dealer[0] + @dealer[1]
-  puts "Thats equal to: #{@dealer_sum}"
-  puts "#{@gamer[0]} #{@gamer[1]}"
-  @gamer_sum = @gamer[0] + @gamer[1]
-  puts "Thats equal to: #{@gamer_sum}"
-  # @gamer.flatten!
-  # split_operation = @gamer.split(/(Hearts|Diamonds|Clubs|Spades)/)
-  # puts split_operation
-  value_giver
-end
+  def generate_deck
+   @suits.each do |suit|
+     @ranks.size.times do |i|
+       value = @value[i]
+       color = (i % 2 == 0) ? 'Black' : 'Red'
+       @cards << Card.new(@ranks[i], suit, color, value)
+     end
+   end
+   binding.pry
+   deal
+  end
 
   def deal
-    temp_rank = @ranks.clone
-    temp_suit = @suits.clone
+    puts "Dealing..."; sleep 1
+    @gamer = []
+    @dealer = []
+    @gamer << @cards.sample
+    @gamer << @cards.sample
+    @dealer << @cards.sample
+    @dealer << @cards.sample
 
-    suit_pick = temp_suit.sample
-    rank_pick = temp_rank.sample
-
-    @card = rank_pick
+    @dealer_value = @dealer.each { |i| @dealer[i].value += i }
+    @dealer_value = @dealer[0].value + @dealer[1].value
+    @gamer_value = @gamer[0].value + @gamer[1].value
+    puts "Dealer Cards".colorize(:yellow)
+    puts "#{@dealer[0].rank} #{@dealer[0].suit}"
+    puts "#{@dealer[1].rank} #{@dealer[1].suit}"
+    # puts "Value: #{@dealer_value}"
+    puts ""
+    puts "Your cards!".colorize(:cyan)
+    puts "#{@gamer[0].rank} #{@gamer[0].suit}"
+    puts "#{@gamer[1].rank} #{@gamer[1].suit}"
+    puts "Value: #{@gamer_value}"; sleep 1
+    player_issue
   end
 
-# def value_giver
-#   @gamer_total = 0
-# case @gamer
-# when 'A'
-#   @gamer_value = 1
-# when '2'
-#   @gamer_value = 2
-# when '3'
-#   @gamer_value = 3
-# when '4'
-#   @gamer_value = 4
-# when '5'
-#   @gamer_value = 5
-# when '6'
-#   @gamer_value = 6
-# when '7'
-#   @gamer_value = 7
-# when '8'
-#   @gamer_value = 8
-# when '9'
-#   @gamer_value = 9
-# when '10'
-#   @gamer_value = 10
-# when 'J'
-#   @gamer_value = 10
-# when 'Q'
-#   @gamer_value = 10
-# when 'K'
-#   @gamer_value = 10
-# end
-# @gamer_total = @gamer_value
-# end
-# # def value_giver
-#   puts @gamer
-#   @gamer = @gamer.to_s
-#   # @gamer = @gamer.join
-#   # @gamer.include? "A10"
-#   # @gamer.gsub!(/A10/, 21)
-#   # @gamer.include? "AJ"
-#   # @gamer.gsub!(/AJ/, 21)
-#   # @gamer.include? "AQ"
-#   # @gamer.gsub!(/AQ/, 21)
-#   # @gamer.include? "AK"
-#   # @gamer.gsub!(/AK/, 21)
-#   @gamer.include? "A"
-#   @gamer.gsub!(/A/, 1)
-#   @gamer.include? "2"
-#   @gamer.gsub!(/2/, 2)
-#   @gamer.include? "3"
-#   @gamer.gsub!(/3/, 3)
-#   @gamer.include? "4"
-#   @gamer.gsub!(/4/, 4)
-#   @gamer.include? "5"
-#   @gamer.gsub!(/5/, 5)
-#   @gamer.include? "6"
-#   @gamer.gsub!(/6/, 6)
-#   @gamer.include? "7"
-#   @gamer.gsub!(/7/, 7)
-#   @gamer.include? "8"
-#   @gamer.gsub!(/8/, 8)
-#   @gamer.include? "9"
-#   @gamer.gsub!(/9/, 9)
-#   @gamer.include? "10"
-#   @gamer.gsub!(/10/, 10)
-#   @gamer.include? "J"
-#   @gamer.gsub!(/J/, 10)
-#   @gamer.include? "Q"
-#   @gamer.gsub!(/Q/, 10)
-#   @gamer.include? "K"
-#   @gamer.gsub!(/K/, 10)
-#
-#   puts @gamer
-# end
-#
-#
-start
+  def player_issue
+    winning_issue
+    puts "Your turn..."
+    puts "--- Options ---"
+    puts "[1] Hit"
+    puts "[2] Stay"
+    choice = gets.strip.to_i
+    if choice == 1
+      @gamer << @cards.sample
+      @gamer_value = @gamer_value + @gamer[2].value
+      puts "Your cards!".colorize(:cyan)
+      puts "#{@gamer[0].rank} #{@gamer[0].suit}"
+      puts "#{@gamer[1].rank} #{@gamer[1].suit}"
+      puts "#{@gamer[2].rank} #{@gamer[2].suit}"
+      #TODO:Make this to work with more than one hit (this goes for the player and the dealer)
+      puts "Value: #{@gamer_value}"; sleep 0
+      player_issue
+    elsif choice == 2
+      dealer_issue
+    end
+  end
+
+  def dealer_issue
+    if @dealer_value < 17
+      puts "Dealers turn"
+      @dealer << @cards.sample
+      @dealer_value = @dealer_value + @dealer[2].value
+      puts "Dealer Cards".colorize(:yellow)
+      puts "#{@dealer[0].rank} #{@dealer[0].suit}"
+      puts "#{@dealer[1].rank} #{@dealer[1].suit}"
+      puts "#{@dealer[2].rank} #{@dealer[2].suit}"
+      puts "Value: #{@dealer_value}"
+      dealer_issue
+    elsif @dealer_value > 21
+      #TODO: Check issue with blackjack for dealer and player
+      puts "You win!!!!".colorize(:green)
+      @player.bank_roll = @player.bank_roll + @bet
+      @player.increment_punctuation
+      puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+    else
+      if @dealer_value > @gamer_value
+        puts "Your value...."; sleep 1
+        puts "#{@gamer_value}"; sleep 1
+        puts "Dealer value...."; sleep 1
+        puts "#{@dealer_value}"; sleep 1
+        puts ""
+        puts "You loose!!!".colorize(:red)
+        @player.bank_roll = @player.bank_roll - @bet
+        @player.unincrement_punctuation
+        puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+      else
+        puts "Your value...."; sleep 1
+        puts "#{@gamer_value}"; sleep 1
+        puts "Dealer value...."; sleep 1
+        puts "#{@dealer_value}"; sleep 1
+        puts ""
+        puts "You win!!!".colorize(:green)
+        @player.bank_roll = @player.bank_roll + @bet
+        @player.increment_punctuation
+        puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+      end
+    end
+  players_choice
+  end
+
+  def winning_issue
+    if @gamer_value > 21
+      puts "Your money is mine!!!".colorize(:red)
+      @player.bank_roll = @player.bank_roll - @bet
+      @player.unincrement_punctuation
+      puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+    elsif @gamer_value == 21
+      puts "Black Jack!!!".colorize(:gree)
+      @player.bank_roll = @player.bank_roll + (@bet * 3)
+      @player.increment_punctuation
+      puts "You now have $ #{@player.bank_roll} and #{@player.punctuation} points".colorize(:light_blue)
+    end
+  end
+
+  def players_choice
+    puts "Do you want to continue playing this game?"
+    answer = gets.strip.downcase
+    place_the_bet if answer.include?('y')
+  end
+end

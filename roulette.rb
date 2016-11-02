@@ -4,6 +4,32 @@ class Roulette
 
 
   def initialize(player)
+    puts """
+
+                            !         !
+                           ! !       ! !
+                          ! . !     ! . !
+                             ^^^^^^^^^ ^
+                           ^             ^
+                         ^  (0)       (0)  ^
+                        ^        ""         ^
+                       ^   ***************    ^
+                     ^   *                 *   ^
+                    ^   *   /\\   /\\   /\\    *    ^
+                   ^   *                     *    ^
+                  ^   *   /\\   /\\   /\\   /\\   *    ^
+                 ^   *                         *    ^
+                 ^  *                           *   ^
+                 ^  *                           *   ^
+                  ^ *                           *  ^
+                   ^*                           * ^
+                    ^ *                        * ^
+                    ^  *                      *  ^
+                      ^  *       ) (         * ^
+                          ^^^^^^^^ ^^^^^^^^^
+
+    """.colorize(:blue)
+
     puts "\n--- Ruuuuuby Roulette ---\n".colorize(:blue); sleep 1
     puts "Welcome #{player.name.capitalize}"
     puts "You have $#{player.bank_roll} dollars to play with!\a"

@@ -19,7 +19,7 @@ class Slots
        |_____/ \\_____|
       /###############\\
 
-    """
+    """.colorize(:blue)
     puts "--- Slots ---\n".colorize(:blue); sleep 1
     puts "Welcome #{player.name.capitalize}"
     puts "You have $#{player.bank_roll} dollars to play with!\a"
